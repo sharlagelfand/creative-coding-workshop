@@ -13,7 +13,7 @@
 
 # Install packages -------------------------------------------------------------
 
-packages <- c("dplyr", "ggforce", "ggplot2", "glue", "knitr", "magick", "prismatic", "plotwidgets", "purrr", "scales", "tidyr", "usethis")
+packages <- c("dplyr", "ggforce", "ggplot2", "glue", "knitr", "magick", "prismatic", "plotwidgets", "purrr", "rmarkdown", "scales", "tidyr", "usethis")
 
 install.packages(setdiff(packages, rownames(installed.packages())))
 
