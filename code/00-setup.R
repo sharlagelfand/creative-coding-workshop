@@ -21,4 +21,5 @@ install.packages(setdiff(packages, rownames(installed.packages())))
 
 library(usethis)
 
-use_course("posit-conf-2023/creative-coding")
+use_course("sharlagelfand/creative-coding-workshop")
+
