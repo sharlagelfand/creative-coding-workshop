@@ -22,18 +22,17 @@ library(purrr)
 
 ## Coordinates of Letter U -----------------------------------------------------
 
-u_shape <-
-  tribble(
-    ~x,  ~y,
-    0,   0,
-    1,   0,
-    1,   1,
-    2/3,   1,
-    2/3, 1/3,
-    1/3, 1/3,
-    1/3,   1,
-    0,   1
-  )
+u_shape <- tribble(
+     ~x,   ~y,
+      0,    0,
+      1,    0,
+      1,    1,
+    2/3,    1,
+    2/3,  1/3,
+    1/3,  1/3,
+    1/3,    1,
+      0,    1
+)
 
 ## Plotting Letter U -----------------------------------------------------------
 
@@ -54,14 +53,14 @@ u_shape %>%
 
 create_initial_shape <- function(x0, y0) {
   tribble(
-    ~x,       ~y,
+        ~x,       ~y,
     x0 + 0,   y0 + 0,
     x0 + 1,   y0 + 0,
     x0 + 1,   y0 + 1,
-    x0 + 2/3,   y0 + 1,
-    x0 + 2/3, y0 + 1/3,
-    x0 + 1/3, y0 + 1/3,
-    x0 + 1/3,   y0 + 1,
+  x0 + 2/3,   y0 + 1,
+  x0 + 2/3, y0 + 1/3,
+  x0 + 1/3, y0 + 1/3,
+  x0 + 1/3,   y0 + 1,
     x0 + 0,   y0 + 1,
     x0 + 0,   y0 + 0
   )
@@ -384,11 +383,11 @@ grid <-
   expand_grid(
     x = seq(0,
             by = perimeter_width,
-            length.out = nrow
+            length.out = ncol
     ),
     y = seq(0,
             by = perimeter_width,
-            length.out = ncol
+            length.out = nrow
     )
   )
 
@@ -396,20 +395,19 @@ grid
 
 ### adding shift in y
 
-grid <-
-  expand_grid(
-    x = seq(0,
-            by = perimeter_width,
-            length.out = nrow
-    ),
-    y = seq(0,
-            by = perimeter_width,
-            length.out = ncol
-    )
-  ) %>%
+grid <- expand_grid(
+  x = seq(0,
+    by = perimeter_width,
+    length.out = ncol
+  ),
+  y = seq(0,
+    by = perimeter_width,
+    length.out = nrow
+  )
+) %>%
   mutate(y = if_else(x >= 5 * perimeter_width,
-                     y + perimeter_width / 2,
-                     y
+    y + perimeter_width / 2,
+    y
   ))
 
 grid %>%
@@ -432,8 +430,8 @@ make_molnar_system <- function() {
 
   grid <-
     expand_grid(
-      x = seq(0, by = perimeter_width, length.out = nrow),
-      y = seq(0, by = perimeter_width, length.out = ncol)
+      x = seq(0, by = perimeter_width, length.out = ncol),
+      y = seq(0, by = perimeter_width, length.out = nrow)
     ) %>%
     mutate(y = if_else(x >= 5 * perimeter_width,
                        y + perimeter_width / 2,

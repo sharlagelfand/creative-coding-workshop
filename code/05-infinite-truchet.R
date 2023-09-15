@@ -19,7 +19,6 @@ library(tidyr)
 library(purrr)
 library(ggforce)
 
-
 # Who actually needs trigonometric functions -----------------------------------
 
 ## Corner 1 --------------------------------------------------------------------
@@ -29,9 +28,10 @@ y <- 0
 sq_width <- 15
 
 tribble(
-  ~x0,          ~y0,  ~start,    ~end,
-  x,            y,       0,    pi/2
+  ~x0, ~y0, ~start,     ~end,
+    x,   y,      0,   pi / 2
 )
+
 
 ## Corner 2 --------------------------------------------------------------------
 
@@ -40,9 +40,9 @@ y <- 0
 sq_width <- 15
 
 tribble(
-  ~x0,          ~y0,  ~start,    ~end,
-  x,            y,       0,    pi/2,
-  x + sq_width,            y,  3*pi/2,    2*pi
+           ~x0, ~y0,       ~start,     ~end,
+             x,   y,          0,     pi / 2,
+  x + sq_width,   y, 3 * pi / 2,     2 * pi
 )
 
 ## Corner 3 --------------------------------------------------------------------
@@ -51,12 +51,14 @@ x <- 0
 y <- 0
 sq_width <- 15
 
+
 tribble(
-  ~x0,          ~y0,  ~start,    ~end,
-  x,            y,       0,    pi/2,
-  x + sq_width,            y,  3*pi/2,    2*pi,
-  x + sq_width, y + sq_width,      pi,  3*pi/2
-)
+           ~x0,          ~y0,       ~start,         ~end,
+             x,            y,            0,       pi / 2,
+  x + sq_width,            y,   3 * pi / 2,       2 * pi,
+  x + sq_width, y + sq_width,           pi,    3 * pi / 2
+  )
+
 
 ## Corner 4 --------------------------------------------------------------------
 
@@ -65,22 +67,22 @@ y <- 0
 sq_width <- 15
 
 tribble(
-  ~x0,          ~y0,  ~start,    ~end,
-  x,            y,       0,    pi/2,
-  x + sq_width,            y,  3*pi/2,    2*pi,
-  x + sq_width, y + sq_width,      pi,  3*pi/2,
-  x, y + sq_width,    pi/2,      pi
-)
+             ~x0,            ~y0,       ~start,         ~end,
+               x,              y,            0,       pi / 2,
+    x + sq_width,              y,   3 * pi / 2,       2 * pi,
+    x + sq_width,   y + sq_width,           pi,   3 * pi / 2,
+               x,   y + sq_width,       pi / 2,           pi
+  )
 
 ## Wrap it up in a function ----------------------------------------------------
 
 set_params <- function(x, y, sq_width) {
   tribble(
-    ~x0,          ~y0,  ~start,    ~end,
-    x,            y,       0,    pi/2,
-    x + sq_width,            y,  3*pi/2,    2*pi,
-    x + sq_width, y + sq_width,      pi,  3*pi/2,
-    x, y + sq_width,    pi/2,      pi
+             ~x0,            ~y0,       ~start,         ~end,
+               x,              y,            0,       pi / 2,
+    x + sq_width,              y,   3 * pi / 2,       2 * pi,
+    x + sq_width,   y + sq_width,           pi,   3 * pi / 2,
+               x,   y + sq_width,       pi / 2,           pi
   )
 }
 
@@ -94,12 +96,12 @@ set_params <-
   function(x, y, sq_width, tile_type) {
     if (tile_type == 1) {
       tribble(
-        ~x0,          ~y0,  ~start,    ~end,
-        x,            y,       0,    pi/2,
-        x + sq_width,            y,  3*pi/2,    2*pi,
-        x + sq_width, y + sq_width,      pi,  3*pi/2,
-        x, y + sq_width,    pi/2,      pi
-      ) %>%
+             ~x0,            ~y0,       ~start,         ~end,
+               x,              y,            0,       pi / 2,
+    x + sq_width,              y,   3 * pi / 2,       2 * pi,
+    x + sq_width,   y + sq_width,           pi,   3 * pi / 2,
+               x,   y + sq_width,       pi / 2,           pi
+    ) %>%
         mutate(num_arcs = c(3, 4, 3, 4))
     }
   }
@@ -110,21 +112,21 @@ set_params <-
   function(x, y, sq_width, tile_type) {
     if (tile_type == 1) {
       tribble(
-        ~x0,          ~y0,  ~start,    ~end,
-        x,            y,       0,    pi/2,
-        x + sq_width,            y,  3*pi/2,    2*pi,
-        x + sq_width, y + sq_width,      pi,  3*pi/2,
-        x, y + sq_width,    pi/2,      pi
-      ) %>%
+             ~x0,            ~y0,       ~start,         ~end,
+               x,              y,            0,       pi / 2,
+    x + sq_width,              y,   3 * pi / 2,       2 * pi,
+    x + sq_width,   y + sq_width,           pi,   3 * pi / 2,
+               x,   y + sq_width,       pi / 2,           pi
+    ) %>%
         mutate(num_arcs = c(3, 4, 3, 4))
     } else if (tile_type == 2) {
       tribble(
-        ~x0,          ~y0,  ~start,    ~end,
-        x,            y,       0,    pi/2,
-        x + sq_width,            y,  3*pi/2,    2*pi,
-        x + sq_width, y + sq_width,      pi,  3*pi/2,
-        x, y + sq_width,    pi/2,      pi
-      ) %>%
+             ~x0,            ~y0,       ~start,         ~end,
+               x,              y,            0,       pi / 2,
+    x + sq_width,              y,   3 * pi / 2,       2 * pi,
+    x + sq_width,   y + sq_width,           pi,   3 * pi / 2,
+               x,   y + sq_width,       pi / 2,           pi
+    ) %>%
         mutate(num_arcs = c(5, 2, 5, 2))
     }
   }
@@ -213,8 +215,8 @@ grid <-
   mutate(
     tile_type =
       sample(c(1, 2),
-             size = n(),
-             replace = TRUE
+        size = n(),
+        replace = TRUE
       )
   )
 
@@ -358,9 +360,9 @@ output_grid %>%
 color <- c("#fffbe6", "#fc8405")
 
 max_num_arcs <- 5
-color <- c("#fffbe6", "#fc8405")
 color_seq <- rep(color,
-                 length.out = max_num_arcs)
+  length.out = max_num_arcs
+)
 color_seq
 
 ## Updating our system

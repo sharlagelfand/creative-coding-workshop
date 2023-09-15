@@ -22,4 +22,3 @@ install.packages(setdiff(packages, rownames(installed.packages())))
 library(usethis)
 
 use_course("sharlagelfand/creative-coding-workshop")
-
