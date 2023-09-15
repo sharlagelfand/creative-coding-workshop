@@ -150,7 +150,7 @@ ggplot() +
   coord_fixed() +
   theme_void()
 
-# Creating circle shapes
+# Creating circle shapes -------------------------------------------------------
 
 ## Circles ---------------------------------------------------------------------
 
@@ -163,6 +163,72 @@ ggplot() +
     )
   ) +
   coord_fixed()
+
+## Trig! -----------------------------------------------------------------------
+
+# Full circle
+
+start <- 0
+end <- 2 * pi
+x0 <- 0
+y0 <- 0
+r <- 1
+
+tau <- seq(start, end, length.out = 48)
+x <- x0 + sin(tau) * r
+y <- y0 + cos(tau) * r
+
+plot_circle_points <- function(x, y) {
+  ggplot() +
+  geom_point(
+    aes(
+      x = x,
+      y = y
+    ),
+    size = 4
+  ) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0) +
+  xlim(-1, 1) +
+  ylim(-1, 1) +
+  coord_fixed()
+}
+
+plot_circle_points(x, y)
+
+## Parts of circles using trig
+
+start <- 0
+end <- pi / 2
+tau <- seq(start, end, length.out = 12)
+x <- x0 + sin(tau) * r
+y <- y0 + cos(tau) * r
+
+plot_circle_points(x, y)
+
+start <- pi / 2
+end <- pi
+tau <- seq(start, end, length.out = 12)
+x <- x0 + sin(tau) * r
+y <- y0 + cos(tau) * r
+
+plot_circle_points(x, y)
+
+start <- pi
+end <- 3 * pi / 2
+tau <- seq(start, end, length.out = 12)
+x <- x0 + sin(tau) * r
+y <- y0 + cos(tau) * r
+
+plot_circle_points(x, y)
+
+start <- 3 * pi / 2
+end <- 2 * pi
+tau <- seq(start, end, length.out = 12)
+x <- x0 + sin(tau) * r
+y <- y0 + cos(tau) * r
+
+plot_circle_points(x, y)
 
 ## Parts of circles ------------------------------------------------------------
 
